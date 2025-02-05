@@ -41,12 +41,21 @@ const MenuSection = () => {
 	}, [categories, loadedCategories])
 
 	return (
-		<Box sx={{ minHeight: '100vh', width: '100%' }}>
-			<ResponsiveCategoriesBar
-				categories={categories}
-				setCategoryToShow={setCategorytoShow}
-				initialCategory={categoryShow}
-			/>
+		<Box
+			sx={{
+				minHeight: '100vh',
+				width: '100%',
+				borderInlineRadius: '30px',
+				boxShadow: 'inset 0px 0px 1000px 80px rgba(0,0,0,0.9)',
+			}}
+		>
+			<AnimatedOnScroll>
+				<ResponsiveCategoriesBar
+					categories={categories}
+					setCategoryToShow={setCategorytoShow}
+					initialCategory={categoryShow}
+				/>
+			</AnimatedOnScroll>
 
 			<ProductsContainer category={categoryShow} />
 		</Box>

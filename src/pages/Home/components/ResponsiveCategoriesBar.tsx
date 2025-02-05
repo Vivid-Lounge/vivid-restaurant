@@ -35,6 +35,24 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 	const [activeSubCategory, setActiveSubCategory] = useState<Category | null>(
 		null
 	)
+	const scrollableRef = useRef<HTMLDivElement>(null)
+
+	const [hasOverflow, setHasOverflow] = useState(false)
+
+	const handleScroll = (direction: 'left' | 'right') => {
+		if (scrollableRef.current) {
+			const scrollAmount = 200 // Adjust this value as needed
+			const newScrollPosition =
+				scrollableRef.current.scrollLeft +
+				(direction === 'left' ? -scrollAmount : scrollAmount)
+
+			scrollableRef.current.scrollTo({
+				left: newScrollPosition,
+				behavior: 'smooth',
+			})
+		}
+	}
+
 	const handleSelectParentCategory = (parent: Category) => {
 		setActiveCategory(parent)
 		setParentCategory(parent)
@@ -63,6 +81,22 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 		}
 	}, [categories, setCategoryToShow])
 
+	useEffect(() => {
+		const checkOverflow = () => {
+			if (scrollableRef.current) {
+				const hasHorizontalOverflow =
+					scrollableRef.current.scrollWidth >
+					scrollableRef.current.clientWidth
+				setHasOverflow(hasHorizontalOverflow)
+			}
+		}
+
+		checkOverflow()
+		window.addEventListener('resize', checkOverflow)
+
+		return () => window.removeEventListener('resize', checkOverflow)
+	}, [categories]) // Re-check when categories change
+
 	return (
 		<>
 			<Box
@@ -88,21 +122,49 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 						flexDirection: 'row',
 						justifyContent: 'initial',
 						color: 'white',
-						flexWrap: isMobile ? 'nowrap' : 'wrap',
-						overflowX: isMobile ? 'auto' : 'hidden',
+						flexWrap: 'nowrap',
+
 						lineHeight: '2',
 						mt: 5,
+						alignItems: 'center',
 						position: 'relative',
 						py: 2,
 					}}
 				>
 					<Stack
+						onClick={() => handleScroll('left')}
+						sx={{
+							width: '5%',
+							height: '100%',
+							cursor: 'pointer',
+
+							display: hasOverflow ? 'flex' : 'none',
+							'&:hover': {
+								opacity: 0.8,
+							},
+						}}
+					>
+						<ArrowIcon
+							sx={{
+								my: 'auto',
+								mx: 'auto',
+								fill: 'white',
+								stroke: 'black',
+								transform: 'rotate(90deg)',
+							}}
+						/>
+					</Stack>
+					<Stack
 						sx={{
 							flexDirection: 'row',
-
+							overflowX: isMobile ? 'scroll' : 'hidden',
+							'&::-webkit-scrollbar': {
+								display: 'none',
+							},
 							mx: 'auto',
 							justifyContent: 'start',
 						}}
+						ref={scrollableRef}
 					>
 						{parentCategories &&
 							parentCategories.map((item, index) => (
@@ -113,9 +175,11 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 											parentCategory?._id === item._id
 												? 'secondary.main'
 												: 'white',
-										fontSize: '1.2rem',
+										fontSize: '1.75rem',
 										display: 'flex',
 										px: 1,
+
+										mx: 2,
 										flexWrap: 'nowrap',
 										cursor: 'pointer',
 										position: 'relative',
@@ -129,9 +193,33 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 								</Box>
 							))}
 					</Stack>
+					<Stack
+						onClick={() => handleScroll('right')}
+						sx={{
+							width: '5%',
+							height: '100%',
+							cursor: 'pointer',
+							ml: 1,
+							bg: 'transparent',
+							display: hasOverflow ? 'flex' : 'none',
+							'&:hover': {
+								opacity: 0.8,
+							},
+						}}
+					>
+						<ArrowIcon
+							sx={{
+								my: 'auto',
+								mx: 'auto',
+								fill: 'white',
+								stroke: 'black',
+								transform: 'rotate(270deg)',
+							}}
+						/>
+					</Stack>
 				</Box>
 
-				<AnimatedTextV2>
+				<AnimatedText>
 					<Stack
 						sx={{
 							display: parentCategory ? 'flex' : 'none',
@@ -156,10 +244,15 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 								.map((subCat, index) => (
 									<Stack
 										key={index}
-										style={{
+										sx={{
 											display: 'flex',
 											flexDirection: 'row',
 											cursor: 'pointer',
+											fontSize: {
+												xs: '1.2rem',
+												md: '1.4rem',
+												lg: '1.5rem',
+											},
 											color:
 												activeSubCategory === subCat
 													? 'orange'
@@ -173,93 +266,10 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 									</Stack>
 								))}
 					</Stack>
-				</AnimatedTextV2>
+				</AnimatedText>
 			</Box>
 		</>
 	)
 }
 
 export default ResponsiveCategoriesBar
-
-// {openDropdownId === item._id && (
-// 	<Box
-// 		ref={dropdownRef}
-// 		sx={{
-// 			position: 'absolute',
-// 			top: '40px',
-// 			left: '0',
-// 			backdropFilter: 'blur(10px)',
-// 			textAlign: 'center',
-// 			display:
-// 				activeCategory?._id === item._id
-// 					? 'flex'
-// 					: 'none',
-// 			width: '100%',
-// 			flexDirection: 'column',
-// 			overflow: 'hidden',
-// 			borderRadius: '10px',
-// 			zIndex: 1,
-// 		}}
-// 	>
-// 		{categories &&
-// 			categories
-// 				.filter(
-// 					(category) =>
-// 						category.parent ===
-// 						item._id
-// 				)
-// 				.map((subCategory, index) => (
-// 					<motion.div
-// 						initial={{
-// 							opacity: 0,
-// 							y: -10,
-// 						}} // Start position (below and invisible)
-// 						animate={{
-// 							opacity: 1,
-// 							y: 0,
-// 						}} // Final position (normal)
-// 						transition={{
-// 							duration: 0.3,
-// 							ease: 'easeOut',
-// 						}} // Smooth effect
-// 					>
-// 						<Box
-// 							key={index}
-// 							sx={{
-// 								color:
-// 									activeCategory?._id ===
-// 									subCategory._id
-// 										? 'secondary.main'
-// 										: 'white',
-// 								fontSize:
-// 									'1rem',
-// 								width: '100%',
-// 								mx: 'auto',
-// 								'&:hover': {
-// 									color: 'secondary.main',
-// 								},
-// 								py: 1,
-// 								cursor: 'pointer',
-// 								position:
-// 									'relative',
-// 							}}
-// 							onClick={() => {
-// 								setActiveCategory(
-// 									subCategory
-// 								)
-
-// 								setCategoryToShow(
-// 									subCategory
-// 								)
-// 							}}
-// 						>
-// 							<AnimatedTextV2>
-// 								{
-// 									subCategory.name
-// 								}
-// 							</AnimatedTextV2>
-// 						</Box>
-// 					</motion.div>
-// 				))}
-// 	</Box>
-// )}

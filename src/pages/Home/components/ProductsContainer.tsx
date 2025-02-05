@@ -11,7 +11,11 @@ type Props = {
 }
 const ProductsContainer: FC<Props> = ({ category }) => {
 	const [products, setProducts] = useState<Product[]>([])
-
+	console.log(category?.name, 'category')
+	console.log(
+		products.forEach((p) => console.log(p.name)),
+		'products'
+	)
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -19,7 +23,8 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 				const productsResponse = await axios.get(
 					ROUTES.categories.getByCategory(category._id)
 				)
-				setProducts(productsResponse.data)
+				if (productsResponse.status === 200)
+					setProducts(productsResponse.data)
 			} catch (error) {
 				console.error(error)
 			}
@@ -28,8 +33,13 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 	}, [category])
 
 	const groupedProducts = products.reduce((acc, product) => {
-		const childCatId = product.childCategory?._id
-		if (childCatId) {
+		if (!product.childCategory) {
+			if (!acc['uncategorized']) {
+				acc['uncategorized'] = []
+			}
+			acc['uncategorized'].push(product)
+		} else {
+			const childCatId = product.childCategory._id
 			if (!acc[childCatId]) {
 				acc[childCatId] = []
 			}
@@ -41,32 +51,56 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 	return (
 		<Grid2
 			container
-			sx={{ mt: 2, flexDirection: 'column', alignItems: 'center' }}
+			sx={{ mt: 6, flexDirection: 'column', alignItems: 'center' }}
 		>
-			<Grid2 size={{ xs: 12, sm: 8, md: 6 }}>
-				{Object.entries(groupedProducts).map(
-					([childCatId, productsGroup]) => (
-						<Grid2 key={childCatId} sx={{ width: '100%' }}>
+			<Grid2 size={{ xs: 10, sm: 8, md: 6 }}>
+				{/* Render uncategorized products first */}
+				{groupedProducts['uncategorized'] && (
+					<Grid2 sx={{ width: '100%', mb: 4 }}>
+						<Typography
+							sx={{
+								color: 'secondary.main',
+								fontFamily: 'Carattere, sans-serif',
+								fontSize: { xs: '2.5rem', md: '3rem' },
+								lineHeight: '1',
+								mb: 2,
+							}}
+						>
+							{category?.name}
+						</Typography>
+						{groupedProducts['uncategorized'].map((product) => (
+							<Grid2
+								key={product._id}
+								sx={{ mt: 2, width: '100%' }}
+							>
+								<AnimatedTextV2>
+									<ProductCard product={product} />
+								</AnimatedTextV2>
+							</Grid2>
+						))}
+					</Grid2>
+				)}
+
+				{/* Render categorized products */}
+				{Object.entries(groupedProducts)
+					.filter(([key]) => key !== 'uncategorized')
+					.map(([childCatId, productsGroup]) => (
+						<Grid2 key={childCatId} sx={{ width: '100%', mb: 4 }}>
 							<Typography
 								sx={{
 									color: 'secondary.main',
 									fontFamily: 'Carattere, sans-serif',
-
 									fontSize: { xs: '2.5rem', md: '3rem' },
 									lineHeight: '1',
+									mb: 2,
 								}}
 							>
 								{productsGroup[0].childCategory?.name}
 							</Typography>
-
 							{productsGroup.map((product) => (
 								<Grid2
 									key={product._id}
-									sx={{
-										mt: 2,
-
-										width: '100%',
-									}}
+									sx={{ mt: 2, width: '100%' }}
 								>
 									<AnimatedTextV2>
 										<ProductCard product={product} />
@@ -74,8 +108,7 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 								</Grid2>
 							))}
 						</Grid2>
-					)
-				)}
+					))}
 			</Grid2>
 		</Grid2>
 	)

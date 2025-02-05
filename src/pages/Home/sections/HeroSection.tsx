@@ -26,55 +26,46 @@ const HeroSection: FC = () => {
 			>
 				<Box
 					sx={{
-						top: '28%',
-						position: 'absolute',
-
-						width: '80%',
-
+						display: 'flex',
+						height: '100%',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center',
+						flexWrap: 'wrap',
 						textAlign: 'center',
 					}}
 				>
-					<Box
-						sx={{
-							display: 'flex',
+					<AnimatedText>
+						<Typography
+							sx={{
+								fontFamily: 'Carattere,serif',
+								color: 'secondary.main',
+								fontSize: {
+									xs: '3.5rem',
 
-							flexDirection: 'column',
-							flexWrap: 'wrap',
-							height: 'fit-content',
-						}}
-					>
-						<AnimatedText>
-							<Typography
-								sx={{
-									fontFamily: 'Carattere,serif',
-									color: 'secondary.main',
-									fontSize: {
-										xs: '3.5rem',
-
-										md: '4.5rem',
-									},
-									lineHeight: '1',
-								}}
-							>
-								Experience Vivid
-							</Typography>
-						</AnimatedText>
-						<AnimatedText>
-							<Typography
-								variant='h2'
-								sx={{
-									fontFamily: 'Antic Didone,serif',
-									lineHeight: '.9',
-								}}
-							>
-								The place of vibrant Flavours
-							</Typography>
-						</AnimatedText>
-					</Box>
+									md: '4.5rem',
+								},
+								lineHeight: '1',
+							}}
+						>
+							Experience Vivid
+						</Typography>
+					</AnimatedText>
+					<AnimatedText>
+						<Typography
+							variant='h2'
+							sx={{
+								fontFamily: 'Antic Didone,serif',
+								lineHeight: '.9',
+							}}
+						>
+							The place of vibrant Flavours
+						</Typography>
+					</AnimatedText>
 					<Typography
 						sx={{
 							textAlign: 'center',
-							width: '50%',
+							width: '70%',
 							justifySelf: 'center',
 							lineHeight: '2',
 							fontSizeAdjust: '0.5',
@@ -95,13 +86,13 @@ const HeroSection: FC = () => {
 						dining experience.
 					</Typography>
 				</Box>
+
 				<Box
 					sx={{
-						width: '50%',
+						width: '100%',
+						bottom: 0,
 						height: '10%',
 						display: 'flex',
-						position: 'absolute',
-						bottom: '50px',
 					}}
 				>
 					<InteractiveSelector />

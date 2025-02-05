@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Product } from '../../../shared/types'
 import { Stack, Typography } from '@mui/material'
+import { SERVE_IMAGES_URL } from '../../../shared/routing/api'
 type Props = {
 	product: Product
 }
@@ -9,108 +10,120 @@ const ProductCard: FC<Props> = ({ product }) => {
 		<>
 			<Stack
 				sx={{
-					minHeight: '120px',
-					height: '100%',
+					height: '220px',
 					width: '100%',
-
+					borderRadius: '12px',
+					display: 'flex',
 					flexDirection: 'row',
+					position: 'relative',
+					background:
+						'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.15) 100%)',
+					boxShadow: '0px 4px 20px rgba(0,0,0,0.2)',
+					transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+					'&:hover': {
+						transform: 'scale(1.05)',
+						boxShadow: '0px 8px 25px rgba(0,0,0,0.3)',
+						'& .product-image': {
+							transform: 'scale(1.15)',
+						},
+					},
 				}}
 			>
 				<Stack
 					sx={{
-						backgroundSize: 'cover',
-						backgroundPosition: 'center',
-						width: '20%',
+						position: 'absolute',
+						zIndex: -2,
+
+						boxShadow:
+							'0px 0px 500px 2w0px rgba(255, 255, 255, 0.2)',
+						left: '50%',
+						top: '50%',
+						rotate: '0deg',
+						transform: 'translate(-50%, -50%)',
+						scale: 1.3,
+						width: '500px',
+
+						background: 'transparent',
+					}}
+				></Stack>
+				<Stack
+					sx={{
+						width: '30%',
+						height: '100%',
 						mx: 2,
 						justifyContent: 'center',
 						alignItems: 'center',
 					}}
 				>
 					<img
-						src={product.imageUrl}
+						src={`${SERVE_IMAGES_URL}${product.imageUrl}`}
 						alt={product.name}
 						className='product-image'
 						style={{
 							borderRadius: '10px',
-							width: '80%',
-							height: '70%',
+							width: '90%',
+							height: '90%',
 							objectFit: 'cover',
-							objectPosition: 'center',
-							aspectRatio: '1/1',
-
-							margin: '5px 0 5px 0',
 							transition: 'transform 0.3s ease',
 						}}
 					/>
 				</Stack>
 				<Stack
 					sx={{
-						width: '80%',
-
+						width: '65%',
 						display: 'flex',
 						flexDirection: 'column',
+						justifyContent: 'center',
 					}}
 				>
-					<Stack
+					<Typography
 						sx={{
-							mr: 1,
-							flexDirection: 'row',
-							mb: 2,
-							justifyContent: 'space-between',
-							position: 'relative',
+							fontSize: '1.9rem',
+							color: 'white',
+							fontWeight: 'bold',
+							fontFamily: 'Neue Montreal,serif',
 						}}
 					>
+						{product.name}
 						<Typography
 							sx={{
-								fontSize: '1.2rem',
-								ml: 1,
-								color: 'white',
+								color: 'secondary.main',
+								fontSize: '1.4rem',
+								fontWeight: 'bold',
+								mt: 1,
+								mb: 1,
 							}}
 						>
-							{product.name}
+							{product.price} RON
 						</Typography>
 						<Typography
 							sx={{
-								color: 'white',
-								fontSize: '1.2rem',
+								fontWeight: '400',
+								fontSize: '1rem',
+								color: '#ddd',
 							}}
 						>
-							{product.price + ' '} RON
+							({product.quantityInGrams} g)
 						</Typography>
-					</Stack>
-					<Stack
+					</Typography>
+
+					<Typography
 						sx={{
-							mr: 1,
-							height: 'fit-content',
-
+							color: '#aaa',
 							fontSize: '0.9rem',
-
-							color: '#888888',
+							mt: 1,
+							height: 'fit-content',
 							overflow: 'hidden',
 							textOverflow: 'ellipsis',
-							mb: 2,
 							WebkitLineClamp: 2,
 							WebkitBoxOrient: 'vertical',
-							lineHeight: '1.2em',
-							wordWrap: 'break-word',
 						}}
 					>
 						{product.description}
-					</Stack>
-					<Stack
-						sx={{
-							height: '20px',
-							width: '100%',
-							color: '#888888',
-							fontSize: '0.8rem',
-						}}
-					>
-						{/* //alergens */}
-					</Stack>
+					</Typography>
 				</Stack>
 			</Stack>
 		</>
 	)
 }
-
 export default ProductCard

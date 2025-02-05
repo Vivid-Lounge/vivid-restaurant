@@ -9,7 +9,9 @@ const MainLayout: FC<Props> = ({ Component }) => {
 		<Box
 			sx={{
 				fontFamily: 'Roboto, sans-serif',
-				backgroundColor: '#111111',
+				backgroundColor: '#181614',
+
+				// backgroundColor: '#111111',
 			}}
 		>
 			<NavBar />

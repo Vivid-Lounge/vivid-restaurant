@@ -120,10 +120,9 @@ const Home: FC = () => {
 				<ArrowUpwardIcon
 					sx={{
 						color: 'white',
-						transform:
-							currentSectionIndex === 0
-								? 'rotate(180deg)'
-								: 'rotate(0deg)',
+						transform: currentSectionIndex
+							? 'rotate(0deg)'
+							: 'rotate(180deg)',
 					}}
 				/>
 			</Box>

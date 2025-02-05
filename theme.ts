@@ -14,7 +14,27 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: 'Roboto',
+		fontFamily: '"Neue Montreal", Roboto, sans-serif',
+		h1: {
+			fontFamily: '"Neue Montreal", sans-serif',
+			fontWeight: 700,
+		},
+		h2: {
+			fontFamily: '"Neue Montreal", sans-serif',
+			fontWeight: 700,
+		},
+		h3: {
+			fontFamily: '"Neue Montreal", sans-serif',
+			fontWeight: 500,
+		},
+		body1: {
+			fontFamily: '"Neue Montreal", sans-serif',
+			fontWeight: 400,
+		},
+		body2: {
+			fontFamily: '"Neue Montreal", sans-serif',
+			fontWeight: 300,
+		},
 	},
 	breakpoints: {
 		values: {
