@@ -7,8 +7,9 @@ import { ArrowIcon, VividLogoIcon } from '../shared/icons'
 const NavBar: React.FC = () => {
 	const [show, setShow] = useState(true)
 	const url = useLocation()
+
 	const [notHome, setNotHome] = useState(url.pathname !== '/')
-	console.log(url.pathname)
+
 	const trigger = useScrollTrigger({
 		threshold: 60,
 	})

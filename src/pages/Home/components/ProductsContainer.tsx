@@ -4,93 +4,80 @@ import axios from 'axios'
 import { ROUTES } from '../../../shared/routing/api'
 import { Grid2, Stack, Typography } from '@mui/material'
 import ProductCard from './ProductCard'
+import AnimatedText from '../../../components/AnimatedText'
+import AnimatedTextV2 from '../../../components/AnimatedTextV2'
 type Props = {
 	category: Category | null
 }
 const ProductsContainer: FC<Props> = ({ category }) => {
 	const [products, setProducts] = useState<Product[]>([])
-	const [loadedProducts, setLoadedProducts] = useState(false)
+
 	useEffect(() => {
-		const fetchProducts = async () => {
+		const fetchData = async () => {
 			try {
-				/*{
-                    get products by category
-                }*/
 				if (!category) return
-				const response = await axios.get(
+				const productsResponse = await axios.get(
 					ROUTES.categories.getByCategory(category._id)
 				)
-				if (response && response.status !== 200)
-					throw new Error('Failed to fetch products')
-				else {
-					setProducts(response?.data)
-					setLoadedProducts(true)
-				}
+				setProducts(productsResponse.data)
 			} catch (error) {
 				console.error(error)
 			}
 		}
-		fetchProducts()
+		fetchData()
 	}, [category])
+
+	const groupedProducts = products.reduce((acc, product) => {
+		const childCatId = product.childCategory?._id
+		if (childCatId) {
+			if (!acc[childCatId]) {
+				acc[childCatId] = []
+			}
+			acc[childCatId].push(product)
+		}
+		return acc
+	}, {} as { [key: string]: Product[] })
+
 	return (
-		<>
-			<Grid2
-				container
-				sx={{
-					mt: 2,
-					flexDirection: 'column',
-					alignItems: 'center',
-				}}
-			>
-				<Grid2
-					size={{
-						xs: 12,
-						sm: 6,
-						md: 5,
-					}}
-					sx={{
-						display: 'flex',
-						width: '100%',
-						flexDirection: 'column',
-					}}
-				>
-					{category && (
-						<Typography
-							sx={{
-								color: 'secondary.main',
-								fontFamily: 'Carattere, sans-serif',
-								border: '1px solid #fff',
-								fontSize: {
-									xs: '2.5rem',
-									md: '3rem',
-								},
-								lineHeight: '1',
-							}}
-						>
-							{category.name}
-						</Typography>
-					)}
-				</Grid2>
-				{products &&
-					products.map((product) => (
-						<Grid2
-							size={{
-								xs: 12,
-								sm: 6,
-								md: 5,
-							}}
-							sx={{
-								mt: 2,
-								border: '1px solid #fff',
-								width: '100%',
-							}}
-							key={product._id}
-						>
-							<ProductCard product={product} />
+		<Grid2
+			container
+			sx={{ mt: 2, flexDirection: 'column', alignItems: 'center' }}
+		>
+			<Grid2 size={{ xs: 12, sm: 8, md: 6 }}>
+				{Object.entries(groupedProducts).map(
+					([childCatId, productsGroup]) => (
+						<Grid2 key={childCatId} sx={{ width: '100%' }}>
+							<Typography
+								sx={{
+									color: 'secondary.main',
+									fontFamily: 'Carattere, sans-serif',
+
+									fontSize: { xs: '2.5rem', md: '3rem' },
+									lineHeight: '1',
+								}}
+							>
+								{productsGroup[0].childCategory?.name}
+							</Typography>
+
+							{productsGroup.map((product) => (
+								<Grid2
+									key={product._id}
+									sx={{
+										mt: 2,
+
+										width: '100%',
+									}}
+								>
+									<AnimatedTextV2>
+										<ProductCard product={product} />
+									</AnimatedTextV2>
+								</Grid2>
+							))}
 						</Grid2>
-					))}
+					)
+				)}
 			</Grid2>
-		</>
+		</Grid2>
 	)
 }
 

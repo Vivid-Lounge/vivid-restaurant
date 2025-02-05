@@ -107,7 +107,14 @@ const InteractiveSelector = () => {
 						underline: 'none',
 					}}
 				>
-					<Link smooth to={`#${item}`}>
+					<Link
+						smooth
+						to={`#${item}`}
+						style={{
+							textDecoration: 'none',
+							color: ' inherit',
+						}}
+					>
 						{item.charAt(0).toUpperCase() + item.slice(1)}
 					</Link>
 				</Box>

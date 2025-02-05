@@ -13,7 +13,9 @@ import EventTypeIcon from './EventTypeIcon'
 import ScheduleIcon from './ScheduleIcon'
 import DateIcon from './DateIcon'
 import { ClockIcon } from './ClockIcon'
+import { SocialIcon } from './SocialIcon'
 export {
+	SocialIcon,
 	EventTypeIcon,
 	UpcomingEventsIcon,
 	ArrowIcon,

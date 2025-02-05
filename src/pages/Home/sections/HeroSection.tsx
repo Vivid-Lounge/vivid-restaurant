@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import InteractiveSelector from '../../../components/InteractiveSelector'
 import { motion } from 'framer-motion'
 import AnimatedText from '../../../components/AnimatedText'
+import Background from '../../../shared/images/hero-restaurant.png'
 const HeroSection: FC = () => {
 	return (
 		<>
@@ -12,7 +13,7 @@ const HeroSection: FC = () => {
 					flexDirection: 'column',
 					alignItems: 'center',
 					height: '100vh',
-					background: `linear-gradient(180deg, rgba(66, 21, 37, 0.33) 0%,rgb(47, 47, 47) 100% ), url()`,
+					background: `linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%,rgba(0, 0, 0,0.1) 1% ), url(${Background})`,
 
 					backgroundSize: 'cover',
 					backgroundPosition: 'center',
@@ -29,7 +30,7 @@ const HeroSection: FC = () => {
 						position: 'absolute',
 
 						width: '80%',
-						border: '1px solid red',
+
 						textAlign: 'center',
 					}}
 				>
@@ -40,7 +41,6 @@ const HeroSection: FC = () => {
 							flexDirection: 'column',
 							flexWrap: 'wrap',
 							height: 'fit-content',
-							border: '1px solid green',
 						}}
 					>
 						<AnimatedText>
@@ -102,7 +102,6 @@ const HeroSection: FC = () => {
 						display: 'flex',
 						position: 'absolute',
 						bottom: '50px',
-						border: '1px solid white',
 					}}
 				>
 					<InteractiveSelector />

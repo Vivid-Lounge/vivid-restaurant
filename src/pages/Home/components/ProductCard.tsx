@@ -12,7 +12,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 					minHeight: '120px',
 					height: '100%',
 					width: '100%',
-					border: '1px solid red',
+
 					flexDirection: 'row',
 				}}
 			>
@@ -37,7 +37,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 							objectFit: 'cover',
 							objectPosition: 'center',
 							aspectRatio: '1/1',
-							border: '1px solid #fff',
+
 							margin: '5px 0 5px 0',
 							transition: 'transform 0.3s ease',
 						}}
@@ -47,7 +47,6 @@ const ProductCard: FC<Props> = ({ product }) => {
 					sx={{
 						width: '80%',
 
-						border: '1px solid #fff',
 						display: 'flex',
 						flexDirection: 'column',
 					}}
@@ -85,7 +84,6 @@ const ProductCard: FC<Props> = ({ product }) => {
 							height: 'fit-content',
 
 							fontSize: '0.9rem',
-							border: '1px solid red',
 
 							color: '#888888',
 							overflow: 'hidden',
@@ -97,8 +95,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 							wordWrap: 'break-word',
 						}}
 					>
-						{product.description +
-							'dwwwwwwwwwwwwwwwwwwwwwwwwwwwwww'}
+						{product.description}
 					</Stack>
 					<Stack
 						sx={{
@@ -108,7 +105,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 							fontSize: '0.8rem',
 						}}
 					>
-						Alergeni: pula mea
+						{/* //alergens */}
 					</Stack>
 				</Stack>
 			</Stack>

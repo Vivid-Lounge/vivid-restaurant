@@ -8,13 +8,17 @@ import { useTheme } from '@mui/material'
 
 import ProductsContainer from '../components/ProductsContainer'
 import ResponsiveCategoriesBar from '../components/ResponsiveCategoriesBar'
+import AnimatedOnScroll from '../../../components/AnimatedOnScroll'
 const MenuSection = () => {
 	const [categories, setCategories] = useState<Category[]>([])
 	const [loadedCategories, setLoadedCategories] = useState(false)
 	const [categoryShow, setCategorytoShow] = useState<Category | null>(null)
-
+	useEffect(() => {
+		console.log(categoryShow?.name, 'category to Show')
+	}, [categoryShow])
 	useEffect(() => {
 		if (loadedCategories) return
+		console.log(categories)
 		const fetchCategories = async () => {
 			try {
 				const response = await axios.get(ROUTES.categories.get())
@@ -34,15 +38,16 @@ const MenuSection = () => {
 			}
 		}
 		fetchCategories()
-	}, [loadedCategories])
+	}, [categories, loadedCategories])
 
 	return (
-		<Box sx={{ height: '100vh', width: '100%' }}>
+		<Box sx={{ minHeight: '100vh', width: '100%' }}>
 			<ResponsiveCategoriesBar
 				categories={categories}
 				setCategoryToShow={setCategorytoShow}
 				initialCategory={categoryShow}
 			/>
+
 			<ProductsContainer category={categoryShow} />
 		</Box>
 	)
