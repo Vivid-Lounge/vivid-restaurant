@@ -1,4 +1,11 @@
-import { Box, Stack, useMediaQuery, useTheme } from '@mui/material'
+import {
+	Box,
+	Divider,
+	Stack,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from '@mui/material'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { ArrowIcon } from '../../../shared/icons'
 import axios from 'axios'
@@ -59,14 +66,15 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 		setCategoryToShow(parent)
 
 		setActiveSubCategory(null)
-		setOpenDropdownId(openDropdownId === parent._id ? null : parent._id)
+		// setOpenDropdownId(openDropdownId === parent._id ? null : parent._id)
 	}
 
-	const handleSelectSubCategory = (subCat: Category) => {
-		setActiveCategory(subCat)
-		setCategoryToShow(subCat)
-		setActiveSubCategory(subCat)
-	}
+	// const handleSelectSubCategory = (subCat: Category) => {
+	// 	setActiveCategory(subCat)
+	// 	setCategoryToShow(subCat)
+	// 	setOpenDropdownId(null)
+	// 	setActiveSubCategory(subCat)
+	// }
 
 	useEffect(() => {
 		if (categories.length > 0) {
@@ -96,6 +104,21 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 
 		return () => window.removeEventListener('resize', checkOverflow)
 	}, [categories]) // Re-check when categories change
+	const dropdownRef = useRef<HTMLDivElement>(null)
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(event.target as Node)
+			) {
+				setOpenDropdownId(null)
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside)
+		return () =>
+			document.removeEventListener('mousedown', handleClickOutside)
+	}, [])
 
 	return (
 		<>
@@ -111,7 +134,11 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 				<Box
 					sx={{
 						borderBottom: '1px solid secondary.light',
-
+						background:
+							'linear-gradient(135deg, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.15) 100%)',
+						boxShadow: '0px 4px 20px rgba(0,0,0,0.2)',
+						transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+						borderRadius: '12px',
 						display: 'flex',
 						width: {
 							xs: '90%',
@@ -218,58 +245,120 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 						/>
 					</Stack>
 				</Box>
-
-				<AnimatedText>
-					<Stack
-						sx={{
-							display: parentCategory ? 'flex' : 'none',
-							color: 'white',
-							minHeight: '30px',
-							height: 'fit-content',
-							width: '50%',
-							mx: 'auto',
-							mt: 1,
-
-							justifyContent: 'center',
-							gap: 5,
-
-							flexDirection: 'row',
-						}}
-					>
-						{parentCategory &&
-							categories
-								.filter(
-									(cat) => cat.parent === parentCategory._id
-								)
-								.map((subCat, index) => (
-									<Stack
-										key={index}
-										sx={{
-											display: 'flex',
-											flexDirection: 'row',
-											cursor: 'pointer',
-											fontSize: {
-												xs: '1.2rem',
-												md: '1.4rem',
-												lg: '1.5rem',
-											},
-											color:
-												activeSubCategory === subCat
-													? 'orange'
-													: 'white',
-										}}
-										onClick={() =>
-											handleSelectSubCategory(subCat)
-										}
-									>
-										{subCat.name}
-									</Stack>
-								))}
-					</Stack>
-				</AnimatedText>
 			</Box>
 		</>
 	)
 }
 
 export default ResponsiveCategoriesBar
+// {parentCategories &&
+// 	parentCategories.map(
+// 		(parent, index) =>
+// 			openDropdownId === parent._id && (
+// 				<Box
+// 					ref={dropdownRef}
+// 					key={parent._id}
+// 					sx={{
+// 						width: {
+// 							xs: '250px',
+// 							sm: '300px',
+// 							md: '350px',
+// 							// Added height to make it scrollable
+// 							// height: '100%',
+// 						},
+// 						height: {
+// 							xs: '300px',
+// 							sm: '350px',
+// 							md: '400px',
+// 						},
+// 						position: 'fixed',
+// 						zIndex: 5,
+// 						left: '50%',
+// 						top: '50%',
+// 						fontSize: '2rem',
+// 						display: 'flex',
+// 						flexDirection: 'column',
+// 						alignItems: 'center',
+
+// 						borderRadius: '12px',
+// 						transform: 'translate(-50%, -50%)',
+// 						// border: '1px solid red',
+// 						backdropFilter: 'blur(30px)',
+// 						color: 'secondary.main',
+// 						fontFamily: 'Carattere,serif',
+// 					}}
+// 				>
+// 					<Typography
+// 						sx={{
+// 							fontFamily: 'inherit',
+// 							fontSize: '2rem',
+// 							mb: 0.5,
+// 							my: 1,
+// 						}}
+// 					>
+// 						{parent.name}
+// 					</Typography>
+// 					<Divider
+// 						variant='middle'
+// 						flexItem
+// 						sx={{
+// 							backgroundColor: 'secondary.main',
+// 							stroke: 'secondary.main',
+// 						}}
+// 					/>
+// 					<Box
+// 						sx={{
+// 							textAlign: 'center',
+// 							height: '100%',
+// 							width: '100%',
+// 							display: 'flex',
+// 							justifyContent: 'center',
+// 							flexDirection: 'column',
+// 							alignItems: 'center',
+// 							fontSize: '2.5rem',
+// 						}}
+// 					>
+// 						{categories
+// 							.filter(
+// 								(child) =>
+// 									child.parent === parent._id
+// 							)
+// 							.map((child, index) => (
+// 								<Typography
+// 									sx={{
+// 										mt: '4px',
+// 										fontSize: 'inherit',
+// 										fontFamily:
+// 											'Carattere,serif',
+// 										cursor: 'pointer',
+// 									}}
+// 								>
+// 									<motion.div
+// 										key={child._id}
+// 										initial={{
+// 											opacity: 0,
+// 											y: 0,
+// 											x: -20,
+// 										}}
+// 										animate={{
+// 											opacity: 1,
+// 											y: 0,
+// 											x: 0,
+// 										}}
+// 										transition={{
+// 											delay: index * 0.1,
+// 										}}
+// 										onClick={() =>
+// 											handleSelectSubCategory(
+// 												child
+// 											)
+// 										}
+// 									>
+// 										{child.name}
+// 									</motion.div>
+// 								</Typography>
+// 							))}
+// 					</Box>
+// 				</Box>
+// 			)
+// 	)}

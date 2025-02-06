@@ -55,7 +55,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 						alignItems: 'center',
 					}}
 				>
-					<img
+					{/* <img
 						src={`${SERVE_IMAGES_URL}${product.imageUrl}`}
 						alt={product.name}
 						className='product-image'
@@ -66,7 +66,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 							objectFit: 'cover',
 							transition: 'transform 0.3s ease',
 						}}
-					/>
+					/> */}
 				</Stack>
 				<Stack
 					sx={{
