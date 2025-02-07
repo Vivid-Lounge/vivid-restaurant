@@ -2,10 +2,9 @@ import React, { FC, useEffect, useState } from 'react'
 import { Category, Product } from '../../../shared/types'
 import axios from 'axios'
 import { ROUTES } from '../../../shared/routing/api'
-import { Grid2, Stack, Typography } from '@mui/material'
+import { Grid2, Typography } from '@mui/material'
 import ProductCard from './ProductCard'
-import AnimatedText from '../../../components/AnimatedText'
-import AnimatedTextV2 from '../../../components/AnimatedTextV2'
+
 import { motion } from 'framer-motion'
 type Props = {
 	category: Category | null

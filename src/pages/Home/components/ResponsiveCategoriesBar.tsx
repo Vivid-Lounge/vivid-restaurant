@@ -1,47 +1,28 @@
-import {
-	Box,
-	Divider,
-	Stack,
-	Typography,
-	useMediaQuery,
-	useTheme,
-} from '@mui/material'
+import { Box, Stack, useMediaQuery, useTheme } from '@mui/material'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { ArrowIcon } from '../../../shared/icons'
-import axios from 'axios'
-import { ROUTES } from '../../../shared/routing/api'
+
 import { Category } from '../../../shared/types'
-import { set } from 'mongoose'
-import { motion } from 'framer-motion'
-import AnimatedOnScroll from '../../../components/AnimatedOnScroll'
-import AnimatedTextV2 from '../../../components/AnimatedTextV2'
-import AnimatedText from '../../../components/AnimatedText'
+
 type Props = {
 	categories: Category[]
 	setCategoryToShow: React.Dispatch<React.SetStateAction<Category | null>>
-	initialCategory: Category | null
 }
 const ResponsiveCategoriesBar: FC<Props> = ({
 	categories,
 	setCategoryToShow,
-	initialCategory,
 }) => {
 	const theme = useTheme()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-	const [activeCategory, setActiveCategory] = useState<Category | null>(
-		initialCategory
-	)
+
 	// console.log(categories)
 	const parentCategories =
 		categories && categories.filter((category) => category.parent === null)
-	const [openDropdownId, setOpenDropdownId] = useState<string | null>(null)
 
 	const [parentCategory, setParentCategory] = useState<Category>(
 		{} as Category
 	)
-	const [activeSubCategory, setActiveSubCategory] = useState<Category | null>(
-		null
-	)
+
 	const scrollableRef = useRef<HTMLDivElement>(null)
 
 	const [hasOverflow, setHasOverflow] = useState(false)
@@ -61,20 +42,9 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 	}
 
 	const handleSelectParentCategory = (parent: Category) => {
-		setActiveCategory(parent)
 		setParentCategory(parent)
 		setCategoryToShow(parent)
-
-		setActiveSubCategory(null)
-		// setOpenDropdownId(openDropdownId === parent._id ? null : parent._id)
 	}
-
-	// const handleSelectSubCategory = (subCat: Category) => {
-	// 	setActiveCategory(subCat)
-	// 	setCategoryToShow(subCat)
-	// 	setOpenDropdownId(null)
-	// 	setActiveSubCategory(subCat)
-	// }
 
 	useEffect(() => {
 		if (categories.length > 0) {
@@ -82,7 +52,6 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 				(category) => category.parent === null
 			)
 			if (parentCategories.length > 0) {
-				setActiveCategory(parentCategories[0])
 				setCategoryToShow(parentCategories[0])
 				setParentCategory(parentCategories[0])
 			}
@@ -103,22 +72,7 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 		window.addEventListener('resize', checkOverflow)
 
 		return () => window.removeEventListener('resize', checkOverflow)
-	}, [categories]) // Re-check when categories change
-	const dropdownRef = useRef<HTMLDivElement>(null)
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				dropdownRef.current &&
-				!dropdownRef.current.contains(event.target as Node)
-			) {
-				setOpenDropdownId(null)
-			}
-		}
-
-		document.addEventListener('mousedown', handleClickOutside)
-		return () =>
-			document.removeEventListener('mousedown', handleClickOutside)
-	}, [])
+	}, [categories])
 
 	return (
 		<>
