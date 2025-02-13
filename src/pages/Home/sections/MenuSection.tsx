@@ -53,7 +53,6 @@ const MenuSection = () => {
 				<ResponsiveCategoriesBar
 					categories={categories}
 					setCategoryToShow={setCategorytoShow}
-					initialCategory={categoryShow}
 				/>
 			</AnimatedOnScroll>
 

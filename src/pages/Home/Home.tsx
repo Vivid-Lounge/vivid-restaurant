@@ -1,32 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react'
+'use client'
+
+import { type FC, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { HashLink as Link } from 'react-router-hash-link'
-import ContactSection from './sections/ContactSection'
-import MenuSection from './sections/MenuSection'
-import FooterSection from './sections/FooterSection'
-import HeroSection from './sections/HeroSection'
 import { Box } from '@mui/material'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import ContactSection from './sections/ContactSection'
+import MenuSection from './sections/MenuSection'
+import HeroSection from './sections/HeroSection'
+import React from 'react'
 
 const Home: FC = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
-	const [pathHashes, setPathHashes] = useState<string[]>([])
 	const [currentSectionIndex, setCurrentSectionIndex] = useState<number>(0)
-	const [currentIndex, setCurrentIndex] = useState(0)
-	const sections = ['footer', 'contact', 'menu', 'home']
+	const sections = ['home', 'menu', 'contact']
 
 	const heroRef = useRef<HTMLDivElement>(null)
 	const menuRef = useRef<HTMLDivElement>(null)
 	const contactRef = useRef<HTMLDivElement>(null)
-	const footerRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		const sections = [
 			{ id: 'home', ref: heroRef },
 			{ id: 'menu', ref: menuRef },
 			{ id: 'contact', ref: contactRef },
-			{ id: 'footer', ref: footerRef },
 		]
 
 		const observer = new IntersectionObserver(
@@ -37,8 +34,7 @@ const Home: FC = () => {
 							(section) => section.ref.current === entry.target
 						)
 						if (section && location.hash !== `#${section.id}`) {
-							// navigate(`#${section.id}`, { replace: true })
-							setPathHashes((prev) => [...prev, `#${section.id}`])
+							navigate(`#${section.id}`, { replace: true })
 							setCurrentSectionIndex(
 								sections.findIndex((s) => s.id === section.id)
 							)
@@ -64,22 +60,16 @@ const Home: FC = () => {
 		}
 	}, [location.hash, navigate])
 
-	const handlePreviousSection = () => {
-		const sections = ['home', 'menu', 'contact', 'footer']
-		const previousIndex =
-			(currentSectionIndex - 1 + sections.length) % sections.length
-		setCurrentSectionIndex(previousIndex)
-		navigate(`#${sections[previousIndex]}`, { replace: true })
-	}
-
-	const handleReverseNavigation = () => {
-		const nextIndex = (currentIndex + 1) % sections.length
-		setCurrentIndex(nextIndex)
+	const handleNavigation = () => {
+		const nextIndex = (currentSectionIndex + 1) % sections.length
+		setCurrentSectionIndex(nextIndex)
 		const nextSection = sections[nextIndex]
 
 		const element = document.getElementById(nextSection)
 		element?.scrollIntoView({ behavior: 'smooth' })
 	}
+
+	const isArrowUp = currentSectionIndex === sections.length - 1
 
 	return (
 		<Box sx={{ position: 'relative' }}>
@@ -92,12 +82,9 @@ const Home: FC = () => {
 			<Box id='contact' ref={contactRef}>
 				<ContactSection />
 			</Box>
-			<Box id='footer' ref={footerRef}>
-				<FooterSection />
-			</Box>
 
 			<Box
-				onClick={handleReverseNavigation}
+				onClick={handleNavigation}
 				sx={{
 					position: 'fixed',
 					bottom: '2rem',
@@ -107,7 +94,6 @@ const Home: FC = () => {
 					display: 'flex',
 					backgroundColor: 'primary.main',
 					borderRadius: '50%',
-
 					alignItems: 'center',
 					justifyContent: 'center',
 					cursor: 'pointer',
@@ -120,9 +106,10 @@ const Home: FC = () => {
 				<ArrowUpwardIcon
 					sx={{
 						color: 'white',
-						transform: currentSectionIndex
+						transform: isArrowUp
 							? 'rotate(0deg)'
 							: 'rotate(180deg)',
+						transition: 'transform 0.2s ease-in-out',
 					}}
 				/>
 			</Box>
