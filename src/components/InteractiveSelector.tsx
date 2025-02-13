@@ -2,11 +2,13 @@ import { Box } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import { ClockIcon } from '../shared/icons'
 import { HashLink as Link } from 'react-router-hash-link'
+import { useLocation } from 'react-router-dom'
 
 const InteractiveSelector = () => {
 	const [selected, setSelected] = useState('home')
 	const dynamicBoxRef = useRef<HTMLDivElement>(null)
 	const containerRef = useRef<HTMLDivElement>(null)
+	const location = useLocation()
 
 	useEffect(() => {
 		if (containerRef.current && dynamicBoxRef.current) {
@@ -23,6 +25,13 @@ const InteractiveSelector = () => {
 		}
 	}, [selected])
 
+	useEffect(() => {
+		const hash = location.hash.replace('#', '')
+		if (hash && ['home', 'menu', 'contact'].includes(hash)) {
+			setSelected(hash)
+		}
+	}, [location.hash])
+
 	return (
 		<Box
 			ref={containerRef}
@@ -30,6 +39,7 @@ const InteractiveSelector = () => {
 				borderRadius: '30px',
 				width: 'fit-content',
 				mx: 'auto',
+				fontWeight: 'bold',
 				height: '50px',
 				padding: '10px',
 				background: 'white',
@@ -88,7 +98,16 @@ const InteractiveSelector = () => {
 					cursor: 'pointer',
 				}}
 			>
-				Home
+				<Link
+					smooth
+					to='#home'
+					style={{
+						textDecoration: 'none',
+						color: 'inherit',
+					}}
+				>
+					Home
+				</Link>
 			</Box>
 			{['menu', 'contact'].map((item) => (
 				<Box
@@ -112,7 +131,7 @@ const InteractiveSelector = () => {
 						to={`#${item}`}
 						style={{
 							textDecoration: 'none',
-							color: ' inherit',
+							color: 'inherit',
 						}}
 					>
 						{item.charAt(0).toUpperCase() + item.slice(1)}

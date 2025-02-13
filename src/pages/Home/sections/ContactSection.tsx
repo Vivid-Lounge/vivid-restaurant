@@ -11,6 +11,7 @@ import {
 import Grid2 from '@mui/material/Grid2'
 import React from 'react'
 import Background from '../../../shared/images/contact.png'
+import InteractiveSelector from '../../../components/InteractiveSelector'
 
 const ContactSection = () => {
 	const theme = useTheme()
@@ -23,6 +24,7 @@ const ContactSection = () => {
 				minHeight: '100vh',
 				width: '100vw',
 				mt: 5,
+				position: 'relative',
 			}}
 		>
 			{/* Left Side - Background and Opening Hours */}
@@ -44,7 +46,15 @@ const ContactSection = () => {
 					sx={{
 						textAlign: 'center',
 						position: 'absolute',
-						bottom: '15%',
+						bottom: {
+							md: '40%',
+							xs: '30%',
+						},
+						scale: {
+							xs: 1,
+							sm: 1.1,
+							md: 1.2,
+						},
 					}}
 				>
 					<Typography
@@ -84,6 +94,8 @@ const ContactSection = () => {
 			{/* Right Side - Contact Form */}
 			<Grid2
 				sx={{
+					position: 'relative',
+
 					flexDirection: 'column',
 					height: '100vh',
 
@@ -165,6 +177,10 @@ const ContactSection = () => {
 						sx={{
 							backgroundColor: 'secondary.main',
 							color: 'black',
+							mb: {
+								xs: 20,
+								md: 0,
+							},
 							fontWeight: 'bold',
 						}}
 					>
@@ -172,6 +188,20 @@ const ContactSection = () => {
 					</Button>
 				</Box>
 			</Grid2>
+			<Box
+				sx={{
+					width: '100%',
+					bottom: {
+						xs: '-6%',
+						md: '-4%',
+					},
+					height: '10%',
+					display: 'flex',
+					position: 'absolute',
+				}}
+			>
+				<InteractiveSelector />
+			</Box>
 		</Grid2>
 	)
 }

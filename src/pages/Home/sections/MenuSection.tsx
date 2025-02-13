@@ -46,7 +46,7 @@ const MenuSection = () => {
 				minHeight: '100vh',
 				width: '100%',
 				borderInlineRadius: '30px',
-				boxShadow: 'inset 0px 0px 1000px 80px rgba(0,0,0,0.9)',
+				boxShadow: 'inset 0px 0px 500px 160px rgba(0, 0, 0, 1)',
 			}}
 		>
 			<AnimatedOnScroll>

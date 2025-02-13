@@ -1,5 +1,3 @@
-'use client'
-
 import { type FC, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Box } from '@mui/material'
@@ -8,7 +6,7 @@ import ContactSection from './sections/ContactSection'
 import MenuSection from './sections/MenuSection'
 import HeroSection from './sections/HeroSection'
 import React from 'react'
-
+import FooterSection from './sections/FooterSection'
 const Home: FC = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
@@ -81,6 +79,9 @@ const Home: FC = () => {
 			</Box>
 			<Box id='contact' ref={contactRef}>
 				<ContactSection />
+			</Box>
+			<Box>
+				<FooterSection />
 			</Box>
 
 			<Box

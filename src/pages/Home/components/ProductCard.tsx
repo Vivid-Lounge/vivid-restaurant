@@ -24,7 +24,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 				borderRadius: '12px',
 				position: 'relative',
 				background:
-					'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.15) 100%)',
+					'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0,0,0,0.15) 100%)',
 				boxShadow: '0px 4px 20px rgba(0,0,0,0.2)',
 				transition: 'transform 0.3s ease, box-shadow 0.3s ease',
 				overflow: 'hidden',
@@ -37,20 +37,6 @@ const ProductCard: FC<Props> = ({ product }) => {
 				},
 			}}
 		>
-			<Stack
-				sx={{
-					position: 'absolute',
-					zIndex: -2,
-					boxShadow: '0px 0px 500px 20px rgba(255, 255, 255, 0.2)',
-					left: '50%',
-					top: '50%',
-					rotate: '0deg',
-					transform: 'translate(-50%, -50%)',
-					scale: 1.3,
-					width: '500px',
-					background: 'transparent',
-				}}
-			/>
 			<Stack
 				sx={{
 					width: isMobile ? '100%' : '30%',
