@@ -21,8 +21,8 @@ const FooterSection = () => {
 					width: '100%',
 					height: '60%',
 					flexDirection: 'row',
-					borderTop: '1px solid white',
-					borderBottom: '1px solid white',
+					borderTop: '1px solid rgba(255, 255, 255, 0.4)',
+					borderBottom: '1px solid rgba(255, 255, 255, 0.4)',
 					justifyContent: 'space-between',
 					alignItems: 'center',
 				}}
@@ -33,7 +33,7 @@ const FooterSection = () => {
 					}}
 				>
 					<VividLogoIcon
-						sx={{ height: '100px', width: '200px', fill: 'white' }}
+						sx={{ height: {xs: '60px', md: '100px'}, width: '200px', fill: 'white' }}
 					/>
 				</Stack>
 				<Stack
@@ -75,8 +75,12 @@ const FooterSection = () => {
 							sx={{
 								cursor: 'pointer',
 								height: '50px',
-								width: '50px',
 								fill: 'grey',
+								width: '50px',
+								'&:hover': {
+									fill: 'white',
+							},
+								
 							}}
 						/>
 
@@ -90,13 +94,16 @@ const FooterSection = () => {
 								height: '50px',
 								width: '50px',
 								fill: 'grey',
+								'&:hover': {
+									fill: 'white',
+								}
 							}}
 						/>
 					</Stack>
 				</Stack>
 				<Stack
 					sx={{
-						width: '20%',
+						width: '21%',
 						flexDirection: 'row',
 						justifyContent: 'end',
 					}}
@@ -104,17 +111,18 @@ const FooterSection = () => {
 				>
 					<Stack
 						sx={{
-							borderRadius: '30px',
-							border: '2px solid rgb(220, 220, 220)',
-
+							borderRadius: '32px',
+							border: '1px solid rgb(220, 220, 220)',
 							width: 'fit-content',
 							color: 'white',
-
-							px: 4,
-							fontSize: '1.1rem',
+							mr: 3,
+							px: 1.5,
+							fontSize: {xs: '0.8rem', md: '1.2rem'},
+							pt: 2,
+							pb: 2,
 							flexWrap: 'wrap',
 							fontWeight: 'bold',
-							flexDirection: 'row',
+							flexDirection: 'column',
 							'&:hover': {
 								backgroundColor: 'rgb(220, 220, 220)',
 								color: 'black',
@@ -122,22 +130,24 @@ const FooterSection = () => {
 							},
 						}}
 					>
-						GET IN <br />
-						TOUCH
+						CONTACT US
 					</Stack>
 				</Stack>
 			</Stack>
 			<Stack
 				sx={{
 					position: 'absolute',
-					bottom: 0,
+					bottom: 5,
 					width: '100%',
 					color: 'rgba(255,255,255,0.5)',
 					justifyContent: 'center',
 					flexDirection: 'row',
+				
 				}}
 			>
+				<Typography sx={{fontFamily: 'Neue Montreal'}}>
 				@VividLounge & Club 2025
+				</Typography>
 			</Stack>
 		</Box>
 	)

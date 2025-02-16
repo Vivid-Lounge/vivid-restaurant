@@ -36,7 +36,8 @@ const InteractiveSelector = () => {
 		<Box
 			ref={containerRef}
 			sx={{
-				borderRadius: '30px',
+				borderRadius: '12px',
+				boxShadow: '0px 5px 50px rgba(0, 0, 0, 0.7)',
 				width: 'fit-content',
 				mx: 'auto',
 				fontWeight: 'bold',
@@ -56,35 +57,14 @@ const InteractiveSelector = () => {
 				sx={{
 					left: '70px',
 					background: 'black',
-					borderRadius: '30px',
+					borderRadius: '8px',
 					position: 'absolute',
 					transition: 'all 0.3s ease',
 					height: '30px',
 				}}
 			/>
 
-			<Box
-				data-id='clock'
-				onClick={() => setSelected('clock')}
-				sx={{
-					zIndex: 1,
-					borderRadius: '50%',
-					display: 'flex',
-					width: '30px',
-					textAlign: 'center',
-					lineHeight: '30px',
-				}}
-			>
-				<ClockIcon
-					fill='white'
-					sx={{
-						my: 'auto',
-						mx: 'auto',
-						color: selected === 'clock' ? 'white' : 'black',
-						fill: selected === 'clock' ? 'white' : 'black',
-					}}
-				/>
-			</Box>
+			
 			<Box
 				data-id='home'
 				onClick={() => setSelected('home')}
@@ -96,6 +76,8 @@ const InteractiveSelector = () => {
 					textAlign: 'center',
 					lineHeight: '30px',
 					cursor: 'pointer',
+					fontFamily: '"Neue Montreal", Roboto',
+					fontWeight: '400',
 				}}
 			>
 				<Link
@@ -123,6 +105,8 @@ const InteractiveSelector = () => {
 						lineHeight: '30px',
 						cursor: 'pointer',
 						textDecoration: 'none',
+						fontFamily: '"Neue Montreal", Roboto',
+						fontWeight: '400',
 						underline: 'none',
 					}}
 				>

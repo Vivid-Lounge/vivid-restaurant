@@ -26,8 +26,7 @@ const NavBar: React.FC = () => {
 				justifyContent: 'center',
 				top: '-1px',
 				left: 0,
-				height: '80px',
-
+				height: '90px',
 				display: 'flex',
 				backdropFilter: !trigger && !notHome ? 'blur(10px)' : 'none',
 				flexDirection: 'row',

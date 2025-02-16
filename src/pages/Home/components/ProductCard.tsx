@@ -87,8 +87,9 @@ const ProductCard: FC<Props> = ({ product }) => {
 							? '1.7rem'
 							: '1.9rem',
 						color: 'white',
-						fontWeight: 'bold',
 						fontFamily: 'Neue Montreal,serif',
+						fontWeight: '300'
+						
 					}}
 				>
 					{product.name}
@@ -101,7 +102,6 @@ const ProductCard: FC<Props> = ({ product }) => {
 							: isTablet
 							? '1.3rem'
 							: '1.4rem',
-						fontWeight: 'bold',
 
 						mb: 2,
 					}}
@@ -121,7 +121,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 					sx={{
 						color: '#aaa',
 						fontSize: '0.9rem',
-						mt: 1,
+						mt: .5,
 						height: 'fit-content',
 						overflow: 'hidden',
 						textOverflow: 'ellipsis',

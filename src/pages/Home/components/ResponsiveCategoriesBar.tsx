@@ -183,6 +183,9 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 									cursor: 'pointer',
 									position: 'relative',
 									textWrap: 'nowrap',
+									fontFamily: '"Neue Montreal", Roboto',
+									fontWeight: '300',
+									
 								}}
 								onClick={() => handleSelectParentCategory(item)}
 							>

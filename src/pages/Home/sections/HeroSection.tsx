@@ -86,7 +86,7 @@ const HeroSection: FC = () => {
 						lineHeight: '1.2',
 					}}
 				>
-					The place of vibrant Flavors
+					The place of vibrant flavors
 				</Typography>
 				<Typography
 					sx={{
@@ -101,7 +101,8 @@ const HeroSection: FC = () => {
 						sx={{
 							color: 'secondary.main',
 							display: 'inline',
-							fontWeight: 'bold',
+							fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' },
+							fontWeight: '500',
 						}}
 					>
 						At Vivid

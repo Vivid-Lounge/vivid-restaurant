@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
 import Background from './../../../shared/images/contact.png'
-
+import { ClockIcon } from '../../../shared/icons/ClockIcon'
 import InteractiveSelector from '../../../components/InteractiveSelector'
 
 const ContactSection = () => {
@@ -34,7 +34,7 @@ const ContactSection = () => {
 					backgroundPosition: 'center',
 					display: 'flex',
 					justifyContent: 'center',
-					alignItems: 'center',
+					alignItems: 'left',
 					position: 'relative',
 					height: '100vh',
 					mb: isMobile ? 5 : 0,
@@ -78,14 +78,27 @@ const ContactSection = () => {
 							borderRadius: '10px',
 							background: 'rgba(255, 255, 255, 0.9)',
 							width: '280px',
+							textAlign: 'left',
+							boxShadow: '0px 5px 50px 2px rgba(37, 36, 36, 0.7)'
 						}}
 					>
-						<Typography variant='h6' sx={{ fontWeight: 'bold' }}>
-							Opening Hours
-						</Typography>
-						<Typography>Mon - Closed</Typography>
-						<Typography>Tue - Fri: 4pm - 8pm</Typography>
-						<Typography>Sat - Sun: 5pm - 11pm</Typography>
+						<ClockIcon sx={{ fontSize: '20px' }} />
+						<Typography variant="h6">Opening Hours</Typography>
+
+						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+							<Typography>Mon</Typography>
+							<Typography>Closed</Typography>
+						</Box>
+
+						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+							<Typography>Tue - Fri</Typography>
+							<Typography>4pm - 8pm</Typography>
+						</Box>
+
+						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+							<Typography>Sat - Sun</Typography>
+							<Typography>5pm - 11pm</Typography>
+						</Box>
 					</Box>
 				</Box>
 			</Grid2>
@@ -180,7 +193,6 @@ const ContactSection = () => {
 								xs: 20,
 								md: 0,
 							},
-							fontWeight: 'bold',
 						}}
 					>
 						GET IN TOUCH
@@ -192,13 +204,14 @@ const ContactSection = () => {
 					width: '100%',
 					bottom: {
 						xs: '-6%',
-						md: '-4%',
+						md: '-3%',
 					},
 					height: '10%',
 					display: 'flex',
 					position: 'absolute',
 				}}
 			>
+
 				<InteractiveSelector />
 			</Box>
 		</Grid2>
