@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Category, Product } from '../../../shared/types'
 import axios from 'axios'
 import { ROUTES } from '../../../shared/routing/api'

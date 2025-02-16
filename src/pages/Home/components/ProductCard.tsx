@@ -4,7 +4,6 @@ import type { FC } from 'react'
 import type { Product } from '../../../shared/types'
 import { Stack, Typography, useTheme, useMediaQuery } from '@mui/material'
 import { SERVE_IMAGES_URL } from '../../../shared/routing/api'
-import React from 'react'
 
 type Props = {
 	product: Product

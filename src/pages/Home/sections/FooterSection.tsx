@@ -1,11 +1,8 @@
 import { Box, Stack, Typography } from '@mui/material'
-import React from 'react'
-import { SocialIcon, VividLogoIcon } from '../../../shared/icons'
+import { VividLogoIcon } from '../../../shared/icons'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
-import { useNavigate } from 'react-router-dom'
 const FooterSection = () => {
-	const navigate = useNavigate()
 	return (
 		<Box
 			sx={{

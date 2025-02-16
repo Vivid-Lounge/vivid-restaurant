@@ -5,7 +5,6 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ContactSection from './sections/ContactSection'
 import MenuSection from './sections/MenuSection'
 import HeroSection from './sections/HeroSection'
-import React from 'react'
 import FooterSection from './sections/FooterSection'
 const Home: FC = () => {
 	const location = useLocation()
@@ -25,8 +24,8 @@ const Home: FC = () => {
 		]
 
 		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
+			(entries: IntersectionObserverEntry[]) => {
+				entries.forEach((entry: IntersectionObserverEntry) => {
 					if (entry.isIntersecting) {
 						const section = sections.find(
 							(section) => section.ref.current === entry.target

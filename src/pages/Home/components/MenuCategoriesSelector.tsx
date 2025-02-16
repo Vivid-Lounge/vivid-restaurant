@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Category } from '../../../shared/types'
 import { Box } from '@mui/material'
 type Props = {
 	categories: Category[]
 }
-const MenuCategoriesSelector: FC<Props> = ({ category }) => {
+const MenuCategoriesSelector: FC<Props> = () => {
 	return (
 		<Box>
 			<h1>MenuCategoriesSelector</h1>

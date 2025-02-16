@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+
 const HandwrittenText = () => {
 	return (
 		<svg viewBox='0 0 500 100' width='100%' height='100'>

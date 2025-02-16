@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ClockIcon } from '../shared/icons'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useLocation } from 'react-router-dom'

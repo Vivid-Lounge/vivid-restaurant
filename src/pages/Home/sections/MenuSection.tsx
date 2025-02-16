@@ -1,10 +1,8 @@
-import { Box, Stack, useMediaQuery } from '@mui/material'
-import React, { useRef, useEffect, useState } from 'react'
-import { ArrowIcon } from '../../../shared/icons'
+import { Box } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { Category } from '../../../shared/types'
 import axios from 'axios'
 import { ROUTES } from '../../../shared/routing/api'
-import { useTheme } from '@mui/material'
 
 import ProductsContainer from '../components/ProductsContainer'
 import ResponsiveCategoriesBar from '../components/ResponsiveCategoriesBar'

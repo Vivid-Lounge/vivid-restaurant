@@ -1,6 +1,4 @@
 import { createSvgIcon } from '@mui/material'
-import React from 'react'
-
 export const SocialIcon = createSvgIcon(
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
