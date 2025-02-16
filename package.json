@@ -17,16 +17,20 @@
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "framer-motion": "^12.0.11",
+    "gsap": "^3.12.7",
     "ngrok": "^5.0.0-beta.2",
     "openssl": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.1.5",
-    "react-router-hash-link": "^2.4.3"
+    "react-router-hash-link": "^2.4.3",
+    "react-type-animation": "^3.2.0",
+    "vara": "^1.4.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/vara": "^1.1.4",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.0",

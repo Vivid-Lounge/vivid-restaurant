@@ -18,7 +18,12 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
-		"noUncheckedSideEffectImports": true
+		"noUncheckedSideEffectImports": true,
+		"allowJs": true,
+		"esModuleInterop": true,
+		"jsx": "react-jsx",
+		"resolveJsonModule": true
 	},
-	"include": ["vite.config.ts"]
+	"include": ["src"],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

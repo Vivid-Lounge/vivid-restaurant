@@ -43,7 +43,9 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 			if (!acc[childCatId]) {
 				acc[childCatId] = []
 			}
-			acc[childCatId].push(product)
+			if (product.isVisible) {
+				acc[childCatId].push(product)
+			}
 		}
 		return acc
 	}, {} as { [key: string]: Product[] })

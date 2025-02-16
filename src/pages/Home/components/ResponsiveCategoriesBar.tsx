@@ -1,6 +1,4 @@
-'use client'
-
-import { Box, Stack, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import React from 'react'
 import { type FC, useEffect, useRef, useState } from 'react'
 import { ArrowIcon } from '../../../shared/icons'
@@ -15,9 +13,6 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 	categories,
 	setCategoryToShow,
 }) => {
-	const theme = useTheme()
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-
 	const parentCategories =
 		categories && categories.filter((category) => category.parent === null)
 
@@ -81,14 +76,12 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 			}
 		}
 
-		scrollableRef.current?.addEventListener('scroll', handleScrollPosition)
+		const currentRef = scrollableRef.current
+		currentRef?.addEventListener('scroll', handleScrollPosition)
 		window.addEventListener('resize', checkOverflowAndSetInitialValues)
 
 		return () => {
-			scrollableRef.current?.removeEventListener(
-				'scroll',
-				handleScrollPosition
-			)
+			currentRef?.removeEventListener('scroll', handleScrollPosition)
 			window.removeEventListener(
 				'resize',
 				checkOverflowAndSetInitialValues
@@ -173,52 +166,6 @@ const ResponsiveCategoriesBar: FC<Props> = ({
 					}}
 					ref={scrollableRef}
 				>
-					{parentCategories &&
-						parentCategories.map((item, index) => (
-							<Box
-								key={index}
-								sx={{
-									color:
-										parentCategory?._id === item._id
-											? 'secondary.main'
-											: 'white',
-									fontSize: '1.75rem',
-									display: 'flex',
-									px: 1,
-									mx: 2,
-									flexWrap: 'nowrap',
-									cursor: 'pointer',
-									position: 'relative',
-									textWrap: 'nowrap',
-								}}
-								onClick={() => handleSelectParentCategory(item)}
-							>
-								{item.name}
-							</Box>
-						))}
-					{parentCategories &&
-						parentCategories.map((item, index) => (
-							<Box
-								key={index}
-								sx={{
-									color:
-										parentCategory?._id === item._id
-											? 'secondary.main'
-											: 'white',
-									fontSize: '1.75rem',
-									display: 'flex',
-									px: 1,
-									mx: 2,
-									flexWrap: 'nowrap',
-									cursor: 'pointer',
-									position: 'relative',
-									textWrap: 'nowrap',
-								}}
-								onClick={() => handleSelectParentCategory(item)}
-							>
-								{item.name}
-							</Box>
-						))}
 					{parentCategories &&
 						parentCategories.map((item, index) => (
 							<Box

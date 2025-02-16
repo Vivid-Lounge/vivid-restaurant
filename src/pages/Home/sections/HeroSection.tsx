@@ -1,104 +1,127 @@
-import { Box, Typography } from '@mui/material'
-import React, { FC } from 'react'
+'use client'
+
+import { Box, Typography, useTheme, useMediaQuery } from '@mui/material'
+import { FC } from 'react'
 import InteractiveSelector from '../../../components/InteractiveSelector'
-import { motion } from 'framer-motion'
-import AnimatedText from '../../../components/AnimatedText'
-import Background from '../../../shared/images/hero-restaurant.png'
+import Background from './../../../shared/images/hero-restaurant.png'
+
+import Handwritten from '../components/Handwritten'
+
 const HeroSection: FC = () => {
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
 	return (
-		<>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				height: '100vh',
+				background: `linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%,rgba(0, 0, 0,0.2) 100% ), url(${Background})`,
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				color: 'white',
+				textShadow: '1px 1px 3px rgba(0,0,0,0.8)',
+				position: 'relative',
+				textAlign: 'center',
+				px: 2,
+			}}
+		>
 			<Box
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
+					justifyContent: 'center',
 					alignItems: 'center',
-					height: '100vh',
-					background: `linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%,rgba(0, 0, 0,0.1) 1% ), url(${Background})`,
-
-					backgroundSize: 'cover',
-					backgroundPosition: 'center',
-					color: 'white',
-					textShadow: '1px 1px 1px rgba(0,0,0,0.8)',
-					fontSize: '2rem',
-					fontWeight: 'bold',
-					position: 'relative',
+					height: '100%',
+					width: '100%',
 				}}
 			>
 				<Box
 					sx={{
 						display: 'flex',
-						height: '100%',
-						flexDirection: 'column',
-						justifyContent: 'center',
 						alignItems: 'center',
-						flexWrap: 'wrap',
-						textAlign: 'center',
+						justifyContent: 'center',
+						ml: 5,
+						mb: { xs: 1, md: 2 },
 					}}
 				>
-					<AnimatedText>
-						<Typography
-							sx={{
-								fontFamily: 'Carattere,serif',
-								color: 'secondary.main',
-								fontSize: {
-									xs: '3.5rem',
-
-									md: '4.5rem',
-								},
-								lineHeight: '1',
-							}}
-						>
-							Experience Vivid
-						</Typography>
-					</AnimatedText>
-					<AnimatedText>
-						<Typography
-							variant='h2'
-							sx={{
-								fontFamily: 'Antic Didone,serif',
-								lineHeight: '.9',
-							}}
-						>
-							The place of vibrant Flavours
-						</Typography>
-					</AnimatedText>
 					<Typography
 						sx={{
-							textAlign: 'center',
-							width: '70%',
-							justifySelf: 'center',
-							lineHeight: '2',
-							fontSizeAdjust: '0.5',
-							mt: 2,
+							fontFamily: 'Carattere, serif',
+							color: theme.palette.secondary.main,
+							fontSize: isMobile ? '3.25rem' : '5rem',
+							lineHeight: '.7',
 						}}
 					>
-						<Typography
-							sx={{
-								color: 'secondary.main',
-								display: 'inline',
-								fontWeight: 'bold',
-							}}
-						>
-							At Vivid
-						</Typography>
-						, every dish is crafted to perfection, blending bold
-						flavors with creative presentation for an unforgettable
-						dining experience.
+						Experience
 					</Typography>
-				</Box>
+					<Box
+						sx={{
+							width: isMobile ? '130px' : '200px',
+							transform: 'translateY(5px)',
 
-				<Box
+							left: '-10px',
+							position: 'relative',
+						}}
+					>
+						<Handwritten
+							text='Vivid'
+							color={theme.palette.secondary.main}
+							duration={2}
+						/>
+					</Box>
+				</Box>
+				<Typography
+					variant='h2'
 					sx={{
-						width: '100%',
-						bottom: 0,
-						height: '10%',
-						display: 'flex',
+						fontFamily: 'Antic Didone, serif',
+						fontSize: {
+							xs: '2rem',
+							sm: '2.5rem',
+							md: '3rem',
+							lg: '3.5rem',
+						},
+						lineHeight: '1.2',
 					}}
 				>
-					<InteractiveSelector />
-				</Box>
+					The place of vibrant Flavors
+				</Typography>
+				<Typography
+					sx={{
+						textAlign: 'center',
+						width: { xs: '90%', sm: '80%', md: '70%' },
+						fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' },
+						lineHeight: '1.6',
+						mt: 2,
+					}}
+				>
+					<Typography
+						sx={{
+							color: 'secondary.main',
+							display: 'inline',
+							fontWeight: 'bold',
+						}}
+					>
+						At Vivid
+					</Typography>
+					, every dish is crafted to perfection, blending bold flavors
+					with creative presentation for an unforgettable dining
+					experience.
+				</Typography>
 			</Box>
-		</>
+			<Box
+				sx={{
+					width: '100%',
+					bottom: 0,
+					height: '10%',
+					display: 'flex',
+				}}
+			>
+				<InteractiveSelector />
+			</Box>
+		</Box>
 	)
 }
 

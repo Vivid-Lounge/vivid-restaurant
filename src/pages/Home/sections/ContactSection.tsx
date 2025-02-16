@@ -5,12 +5,11 @@ import {
 	Button,
 	useMediaQuery,
 	useTheme,
-	Stack,
 	InputLabel,
 } from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
-import React from 'react'
-import Background from '../../../shared/images/contact.png'
+import Background from './../../../shared/images/contact.png'
+
 import InteractiveSelector from '../../../components/InteractiveSelector'
 
 const ContactSection = () => {

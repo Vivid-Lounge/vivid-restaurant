@@ -8,6 +8,7 @@ import React from 'react'
 
 type Props = {
 	product: Product
+	index?: number
 }
 
 const ProductCard: FC<Props> = ({ product }) => {
@@ -102,8 +103,8 @@ const ProductCard: FC<Props> = ({ product }) => {
 							? '1.3rem'
 							: '1.4rem',
 						fontWeight: 'bold',
-						mt: 1,
-						mb: 1,
+
+						mb: 2,
 					}}
 				>
 					{product.price} RON

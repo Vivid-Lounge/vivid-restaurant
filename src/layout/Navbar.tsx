@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom'
 import { ArrowIcon, VividLogoIcon } from '../shared/icons'
 
 const NavBar: React.FC = () => {
-	const [show, setShow] = useState(true)
 	const url = useLocation()
 
 	const [notHome, setNotHome] = useState(url.pathname !== '/')
@@ -14,9 +13,6 @@ const NavBar: React.FC = () => {
 		threshold: 60,
 	})
 
-	const hideOnScroll = useScrollTrigger({
-		threshold: 0,
-	})
 	useEffect(() => {
 		setNotHome(url.pathname !== '/')
 	}, [url.pathname])
@@ -30,33 +26,15 @@ const NavBar: React.FC = () => {
 				justifyContent: 'center',
 				top: '-1px',
 				left: 0,
-				height: '60px',
+				height: '80px',
+
+				display: 'flex',
 				backdropFilter: !trigger && !notHome ? 'blur(10px)' : 'none',
 				flexDirection: 'row',
 				transform: !trigger ? 'translateY(0)' : 'translateY(-100%)',
 				transition: 'transform 0.3s ease-in-out',
 				gap: '16px',
-				'> *': {
-					textDecoration: 'none !important',
-					color: 'white !important',
-					textTransform: 'uppercase',
-					cursor: 'pointer',
-					transition: 'all 0.2s ease-in-out',
-					'&::after': {
-						transition: 'all 0.2s ease-in-out',
-						content: '""',
-						height: '1px',
-						borderRadius: '2px',
-						width: '0%',
-						background: 'white',
-						display: 'flex',
-					},
-					'&:hover': {
-						'&::after': {
-							width: '100%',
-						},
-					},
-				},
+
 				zIndex: 2,
 			}}
 		>
@@ -91,11 +69,14 @@ const NavBar: React.FC = () => {
 			<Link smooth to='/#home'>
 				<VividLogoIcon
 					sx={{
-						mx: 3,
-
+						m: 5,
 						left: 0,
 						fill: 'white',
-						width: '100px',
+						width: {
+							xs: '90px',
+							sm: '100px',
+							md: '110px',
+						},
 						height: 'auto',
 					}}
 				/>
