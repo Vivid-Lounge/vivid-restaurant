@@ -101,7 +101,7 @@ const HeroSection: FC = () => {
 						sx={{
 							color: 'secondary.main',
 							display: 'inline',
-							fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' },
+							fontSize: { xs: '1rem', sm: '1.2rem', md: '1.3rem' },
 							fontWeight: '500',
 						}}
 					>
