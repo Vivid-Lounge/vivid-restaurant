@@ -1,6 +1,12 @@
 import { Box, Container, Typography } from '@mui/material'
 import About from '../../../shared/images/hero-restaurant.png'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 const LegalPage = () => {
+	const location = useLocation().pathname
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [location])
 	return (
 		<Box
 			sx={{
@@ -11,6 +17,7 @@ const LegalPage = () => {
 				backdropFilter: 'blur(5px)',
 				minHeight: '100vh',
 				py: { xs: 4, md: 8 },
+				textAlign: 'center',
 			}}
 		>
 			<Container maxWidth='lg'>

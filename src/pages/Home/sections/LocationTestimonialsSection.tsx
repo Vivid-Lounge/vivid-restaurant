@@ -97,12 +97,14 @@ const LocationTestimonialsSection = () => {
 										sx={{
 											backgroundColor:
 												'rgba(255, 255, 255, 0.05)',
+
 											borderRadius: '12px',
 											p: 4,
 											minHeight: '200px',
 											display: 'flex',
 											flexDirection: 'column',
 											justifyContent: 'center',
+											position: 'relative',
 										}}
 									>
 										<Typography
@@ -119,9 +121,26 @@ const LocationTestimonialsSection = () => {
 											sx={{
 												color: 'secondary.main',
 												fontWeight: 'bold',
+												position: 'relative',
 											}}
 										>
 											{testimonial.author}
+											<Box
+												sx={{
+													width: '100px',
+													// height: '10px',
+													position: 'absolute',
+													zIndex: -1,
+													top: '-100%',
+													left: '50%',
+													transform:
+														'translate(-50%, -50%)',
+													boxShadow:
+														'0px 0px 1000px 30px rgba(255, 115, 1, 0.7)',
+													// backgroundColor:
+													// 	'rgba(217, 93, 57, 0.5)',
+												}}
+											></Box>
 										</Typography>
 									</Box>
 								</SwiperSlide>
