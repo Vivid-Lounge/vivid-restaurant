@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
 			sx={{
 				width: '100%',
 				position: notHome ? 'block' : 'fixed',
-				mb: '100px',
+
 				alignItems: 'center',
 				justifyContent: 'center',
 				top: '-1px',

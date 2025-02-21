@@ -1,128 +1,224 @@
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Link, Stack, Typography } from '@mui/material'
 import { VividLogoIcon } from '../../../shared/icons'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import { Navigate, useNavigate } from 'react-router-dom'
+
 const FooterSection = () => {
+	const navigate = useNavigate()
 	return (
 		<Box
 			sx={{
 				background: 'black',
-				height: '40vh',
-				position: 'relative',
-				width: '100vdw',
+				minHeight: '300px', // More reliable than vh
+				width: '100%',
 				display: 'flex',
 				flexDirection: 'column',
-				justifyContent: 'space-around',
+				position: 'relative',
+				pb: 8, // Space for copyright text
 			}}
 		>
-			<Stack></Stack>
 			<Stack
 				sx={{
 					width: '100%',
-					height: '60%',
-					flexDirection: 'row',
+					py: { xs: 4, md: 6 },
+					px: { xs: 2, md: 4 },
 					borderTop: '1px solid rgba(255, 255, 255, 0.4)',
 					borderBottom: '1px solid rgba(255, 255, 255, 0.4)',
-					justifyContent: 'space-between',
+					display: 'flex',
+					flexDirection: { xs: 'column', md: 'row' },
 					alignItems: 'center',
+					gap: { xs: 4, md: 0 },
 				}}
 			>
+				{/* Logo Section */}
 				<Stack
 					sx={{
-						width: '20%',
+						width: { xs: '100%', md: '20%' },
+						alignItems: { xs: 'center', md: 'flex-start' },
 					}}
 				>
 					<VividLogoIcon
-						sx={{ height: {xs: '60px', md: '100px'}, width: '200px', fill: 'white' }}
+						sx={{
+							height: { xs: '60px', md: '80px' },
+							width: 'auto',
+							fill: 'white',
+						}}
 					/>
 				</Stack>
+
+				{/* Social Media Section */}
 				<Stack
 					sx={{
-						color: 'white',
-						flexDirection: 'column',
-						width: '60%',
+						width: { xs: '100%', md: '60%' },
+						alignItems: 'center',
+						gap: 2,
 					}}
 				>
 					<Typography
+						variant='subtitle1'
 						sx={{
-							textWrap: 'wrap',
-							fill: 'white',
-
+							color: 'grey.400',
 							textTransform: 'uppercase',
 							letterSpacing: '2px',
-							wordSpacing: '3px',
 							textAlign: 'center',
-							color: 'grey',
+							fontWeight: 500,
 						}}
 					>
 						Follow Us On
-						<br /> Social Media
+						<br />
+						Social Media
 					</Typography>
-					<Stack
-						sx={{
-							flexDirection: 'row',
-							width: '100%',
 
+					<Stack
+						direction='row'
+						spacing={2}
+						sx={{
 							justifyContent: 'center',
-							gap: '10px',
 						}}
 					>
 						<FacebookIcon
 							onClick={() =>
-								(window.location.href =
-									'https://www.facebook.com/vividclubiasi')
+								window.open(
+									'https://www.facebook.com/vividclubiasi',
+									'_blank'
+								)
 							}
 							sx={{
+								fontSize: 40,
+								color: 'grey.400',
 								cursor: 'pointer',
-								height: '50px',
-								fill: 'grey',
-								width: '50px',
+								transition: 'color 0.2s ease',
 								'&:hover': {
-									fill: 'white',
-							},
-								
+									color: 'white',
+								},
 							}}
 						/>
-
 						<InstagramIcon
 							onClick={() =>
-								(window.location.href =
-									'https://www.instagram.com/vividclubiasi/')
+								window.open(
+									'https://www.instagram.com/vividclubiasi/',
+									'_blank'
+								)
 							}
 							sx={{
+								fontSize: 40,
+								color: 'grey.400',
 								cursor: 'pointer',
-								height: '50px',
-								width: '50px',
-								fill: 'grey',
+								transition: 'color 0.2s ease',
 								'&:hover': {
-									fill: 'white',
-								}
+									color: 'white',
+								},
 							}}
 						/>
 					</Stack>
+					<Stack
+						sx={{
+							textAlign: 'center',
+							mb: -3,
+							mt: 1,
+							fontSize: '0.8rem',
+						}}
+					>
+						<Box>
+							<Typography
+								variant='body1'
+								sx={{
+									fontWeight: 600,
+									color: 'rgba(255,255,255,0.5)',
+									'&:hover': {
+										cursor: 'pointer',
+										color: 'primary.main',
+									},
+								}}
+							>
+								Valori nutritionale
+							</Typography>
+							<Typography
+								variant='body1'
+								sx={{
+									fontWeight: 600,
+									color: 'rgba(255,255,255,0.5)',
+									'&:hover': {
+										cursor: 'pointer',
+										color: 'primary.main',
+									},
+								}}
+								onClick={() => navigate('/legal')}
+							>
+								Politica de Confidentialitate
+							</Typography>
+						</Box>
+
+						<Box
+							sx={{
+								gap: 4,
+								display: 'flex',
+								justifyContent: 'center',
+								mt: 2,
+								fontWeight: 600,
+								mb: { xs: 2, md: 0 },
+								'& a': {
+									'&:hover': {
+										color: 'secondary.main',
+									},
+								},
+							}}
+						>
+							<Link
+								variant='body1'
+								sx={{
+									fontWeight: 600,
+									textDecoration: 'none',
+									color: 'rgba(255,255,255,0.5)',
+								}}
+								href='/#home'
+							>
+								Home
+							</Link>
+							<Link
+								variant='body1'
+								sx={{
+									fontWeight: 600,
+									textDecoration: 'none',
+									color: 'rgba(255,255,255,0.5)',
+								}}
+								href='/#home'
+							>
+								Meniu
+							</Link>
+							<Link
+								variant='body1'
+								sx={{
+									fontWeight: 600,
+									textDecoration: 'none',
+									color: 'rgba(255,255,255,0.5)',
+								}}
+								href='/#home'
+							>
+								Contact
+							</Link>
+						</Box>
+					</Stack>
 				</Stack>
+
+				{/* Contact Button Section */}
 				<Stack
 					sx={{
-						width: '21%',
-						flexDirection: 'row',
-						justifyContent: 'end',
+						width: { xs: '100%', md: '20%' },
+						alignItems: { xs: 'center', md: 'flex-end' },
 					}}
-					fontWeight={1200}
 				>
-					<Stack
+					<Box
 						sx={{
 							borderRadius: '32px',
 							border: '1px solid rgb(220, 220, 220)',
-							width: 'fit-content',
+							px: 3,
+							py: 2,
 							color: 'white',
-							mr: 3,
-							px: 1.5,
-							fontSize: {xs: '0.8rem', md: '1.2rem'},
-							pt: 2,
-							pb: 2,
-							flexWrap: 'wrap',
-							fontWeight: 'bold',
-							flexDirection: 'column',
+							fontSize: { xs: '0.9rem', md: '1rem' },
+							fontWeight: 600,
+							transition: 'all 0.2s ease',
 							'&:hover': {
 								backgroundColor: 'rgb(220, 220, 220)',
 								color: 'black',
@@ -131,22 +227,37 @@ const FooterSection = () => {
 						}}
 					>
 						CONTACT US
-					</Stack>
+					</Box>
 				</Stack>
 			</Stack>
 			<Stack
 				sx={{
-					position: 'absolute',
-					bottom: 5,
 					width: '100%',
-					color: 'rgba(255,255,255,0.5)',
-					justifyContent: 'center',
-					flexDirection: 'row',
-				
+					textAlign: 'start',
+				}}
+			></Stack>
+			{/* Copyright Section */}
+			<Stack
+				sx={{
+					position: 'absolute',
+					bottom: 0,
+					width: '100%',
+					py: 2,
+					alignItems: 'center',
+					gap: 1,
 				}}
 			>
-				<Typography sx={{fontFamily: 'Neue Montreal'}}>
-				@VividLounge & Club 2025
+				<Typography
+					variant='body2'
+					sx={{
+						color: 'rgba(255,255,255,0.5)',
+						textAlign: 'center',
+						fontFamily: 'Neue Montreal',
+					}}
+				>
+					VividLounge & Club 2025
+					<br />
+					@2025 Toate drepturile rezervate
 				</Typography>
 			</Stack>
 		</Box>

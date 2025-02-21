@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.2",
     "@mui/material": "^6.4.2",
+    "@types/swiper": "^5.4.3",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "framer-motion": "^12.0.11",
@@ -25,6 +26,7 @@
     "react-router-dom": "^7.1.5",
     "react-router-hash-link": "^2.4.3",
     "react-type-animation": "^3.2.0",
+    "swiper": "^11.2.4",
     "vara": "^1.4.1"
   },
   "devDependencies": {

@@ -1,45 +1,39 @@
-import { type FC, useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { Box } from '@mui/material'
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
-import ContactSection from './sections/ContactSection'
-import MenuSection from './sections/MenuSection'
-import HeroSection from './sections/HeroSection'
-import FooterSection from './sections/FooterSection'
-const Home: FC = () => {
-	const location = useLocation()
-	const navigate = useNavigate()
-	const [currentSectionIndex, setCurrentSectionIndex] = useState<number>(0)
-	const sections = ['home', 'menu', 'contact']
+'use client'
 
+import { useRef, useEffect } from 'react'
+import { Box } from '@mui/material'
+import HeroSection from './sections/HeroSection'
+import MenuSection from './sections/MenuSection'
+import ContactSection from './sections/ContactSection'
+import FooterSection from './sections/FooterSection'
+import LocationTestimonialsSection from './sections/LocationTestimonialsSection'
+
+const Home = () => {
 	const heroRef = useRef<HTMLDivElement>(null)
 	const menuRef = useRef<HTMLDivElement>(null)
 	const contactRef = useRef<HTMLDivElement>(null)
+	const locationRef = useRef<HTMLDivElement>(null)
+
+	const sections = [
+		{ id: 'home', ref: heroRef },
+		{ id: 'menu', ref: menuRef },
+		{ id: 'contact', ref: contactRef },
+		{ id: 'location', ref: locationRef },
+	]
 
 	useEffect(() => {
-		const sections = [
-			{ id: 'home', ref: heroRef },
-			{ id: 'menu', ref: menuRef },
-			{ id: 'contact', ref: contactRef },
-		]
-
 		const observer = new IntersectionObserver(
-			(entries: IntersectionObserverEntry[]) => {
-				entries.forEach((entry: IntersectionObserverEntry) => {
+			(entries) => {
+				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
-						const section = sections.find(
-							(section) => section.ref.current === entry.target
-						)
-						if (section && location.hash !== `#${section.id}`) {
-							navigate(`#${section.id}`, { replace: true })
-							setCurrentSectionIndex(
-								sections.findIndex((s) => s.id === section.id)
-							)
-						}
+						// Update active section in navigation (if needed)
+						// Example: setActiveSection(entry.target.id);
 					}
 				})
 			},
-			{ threshold: 0.5 } // Adjust this value as needed
+			{
+				rootMargin: '-50% 0% -50% 0%', // Adjust as needed
+			}
 		)
 
 		sections.forEach((section) => {
@@ -55,21 +49,10 @@ const Home: FC = () => {
 				}
 			})
 		}
-	}, [location.hash, navigate])
-
-	const handleNavigation = () => {
-		const nextIndex = (currentSectionIndex + 1) % sections.length
-		setCurrentSectionIndex(nextIndex)
-		const nextSection = sections[nextIndex]
-
-		const element = document.getElementById(nextSection)
-		element?.scrollIntoView({ behavior: 'smooth' })
-	}
-
-	const isArrowUp = currentSectionIndex === sections.length - 1
+	}, [])
 
 	return (
-		<Box sx={{ position: 'relative' }}>
+		<>
 			<Box id='home' ref={heroRef}>
 				<HeroSection />
 			</Box>
@@ -79,41 +62,13 @@ const Home: FC = () => {
 			<Box id='contact' ref={contactRef}>
 				<ContactSection />
 			</Box>
-			<Box>
+			<Box id='location' ref={locationRef}>
+				<LocationTestimonialsSection />
+			</Box>
+			{/* <Box>
 				<FooterSection />
-			</Box>
-
-			<Box
-				onClick={handleNavigation}
-				sx={{
-					position: 'fixed',
-					bottom: '2rem',
-					right: '2rem',
-					width: '3rem',
-					height: '3rem',
-					display: 'flex',
-					backgroundColor: 'primary.main',
-					borderRadius: '50%',
-					alignItems: 'center',
-					justifyContent: 'center',
-					cursor: 'pointer',
-					zIndex: 1000,
-					'&:hover': {
-						backgroundColor: 'primary.dark',
-					},
-				}}
-			>
-				<ArrowUpwardIcon
-					sx={{
-						color: 'white',
-						transform: isArrowUp
-							? 'rotate(0deg)'
-							: 'rotate(180deg)',
-						transition: 'transform 0.2s ease-in-out',
-					}}
-				/>
-			</Box>
-		</Box>
+			</Box> */}
+		</>
 	)
 }
 

@@ -57,7 +57,7 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 		>
 			<Grid2 size={{ xs: 10, sm: 8, md: 6 }}>
 				{/* Render uncategorized products first */}
-				{groupedProducts['uncategorized'] && (
+				{groupedProducts && groupedProducts['uncategorized'] && (
 					<Grid2 sx={{ width: '100%', mb: 4 }}>
 						<Typography
 							sx={{
@@ -70,38 +70,39 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 						>
 							{category?.name}
 						</Typography>
-						{groupedProducts['uncategorized'].map(
-							(product, index) => (
-								<Grid2
-									key={product._id}
-									sx={{ mt: 2, width: '100%' }}
-								>
-									<motion.div
+						{groupedProducts &&
+							groupedProducts['uncategorized'].map(
+								(product, index) => (
+									<Grid2
 										key={product._id}
-										initial={{
-											opacity: 0,
-											y: 0,
-											x: -50,
-										}}
-										animate={{
-											opacity: 1,
-											y: 0,
-											x: 0,
-										}}
-										transition={{
-											duration: 0.5, // Animation duration in seconds
-											delay: index * 0.1, // Stagger delay between items
-											ease: 'easeOut', // Easing function
-											type: 'spring', // Animation type
-											stiffness: 100, // Spring stiffness
-											damping: 10, // Spring damping
-										}}
+										sx={{ mt: 2, width: '100%' }}
 									>
-										<ProductCard product={product} />
-									</motion.div>
-								</Grid2>
-							)
-						)}
+										<motion.div
+											key={product._id}
+											initial={{
+												opacity: 0,
+												y: 0,
+												x: -50,
+											}}
+											animate={{
+												opacity: 1,
+												y: 0,
+												x: 0,
+											}}
+											transition={{
+												duration: 0.5, // Animation duration in seconds
+												delay: index * 0.1, // Stagger delay between items
+												ease: 'easeOut', // Easing function
+												type: 'spring', // Animation type
+												stiffness: 100, // Spring stiffness
+												damping: 10, // Spring damping
+											}}
+										>
+											<ProductCard product={product} />
+										</motion.div>
+									</Grid2>
+								)
+							)}
 					</Grid2>
 				)}
 
@@ -119,47 +120,49 @@ const ProductsContainer: FC<Props> = ({ category }) => {
 									mb: 2,
 								}}
 							>
-								{productsGroup[0].childCategory?.name}
+								{productsGroup[0] &&
+									productsGroup[0].childCategory?.name}
 							</Typography>
-							{productsGroup.map((product, index) => (
-								<Grid2
-									key={product._id}
-									sx={{ mt: 2, width: '100%' }}
-								>
-									<motion.div
+							{productsGroup &&
+								productsGroup.map((product, index) => (
+									<Grid2
 										key={product._id}
-										initial={{
-											opacity: 0,
-											y: 0,
-											x: -40,
-										}}
-										animate={{
-											opacity: 1,
-											y: 0,
-											x: -20,
-										}}
-										whileInView={{
-											opacity: 1,
-											x: 0,
-										}}
-										viewport={{
-											once: false,
-											amount: 0.3,
-										}}
-										transition={{
-											duration: 0.6, // Animation duration in seconds
-											delay: index * 0.1, // Stagger delay between items
-											ease: 'easeOut', // Easing function
-											// Animation type
-											type: 'spring',
-											stiffness: 100, // Spring stiffness
-											damping: 20, // Spring damping
-										}}
+										sx={{ mt: 2, width: '100%' }}
 									>
-										<ProductCard product={product} />
-									</motion.div>
-								</Grid2>
-							))}
+										<motion.div
+											key={product._id}
+											initial={{
+												opacity: 0,
+												y: 0,
+												x: -40,
+											}}
+											animate={{
+												opacity: 1,
+												y: 0,
+												x: -20,
+											}}
+											whileInView={{
+												opacity: 1,
+												x: 0,
+											}}
+											viewport={{
+												once: false,
+												amount: 0.3,
+											}}
+											transition={{
+												duration: 0.6, // Animation duration in seconds
+												delay: index * 0.1, // Stagger delay between items
+												ease: 'easeOut', // Easing function
+												// Animation type
+												type: 'spring',
+												stiffness: 100, // Spring stiffness
+												damping: 20, // Spring damping
+											}}
+										>
+											<ProductCard product={product} />
+										</motion.div>
+									</Grid2>
+								))}
 						</Grid2>
 					))}
 			</Grid2>

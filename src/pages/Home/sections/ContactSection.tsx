@@ -79,23 +79,38 @@ const ContactSection = () => {
 							background: 'rgba(255, 255, 255, 0.9)',
 							width: '280px',
 							textAlign: 'left',
-							boxShadow: '0px 5px 50px 2px rgba(37, 36, 36, 0.7)'
+							boxShadow: '0px 5px 50px 2px rgba(37, 36, 36, 0.7)',
 						}}
 					>
 						<ClockIcon sx={{ fontSize: '20px' }} />
-						<Typography variant="h6">Opening Hours</Typography>
+						<Typography variant='h6'>Opening Hours</Typography>
 
-						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'space-between',
+							}}
+						>
 							<Typography>Mon</Typography>
 							<Typography>Closed</Typography>
 						</Box>
 
-						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'space-between',
+							}}
+						>
 							<Typography>Tue - Fri</Typography>
 							<Typography>4pm - 8pm</Typography>
 						</Box>
 
-						<Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'space-between',
+							}}
+						>
 							<Typography>Sat - Sun</Typography>
 							<Typography>5pm - 11pm</Typography>
 						</Box>
@@ -209,9 +224,9 @@ const ContactSection = () => {
 					height: '10%',
 					display: 'flex',
 					position: 'absolute',
+					mb: 1,
 				}}
 			>
-
 				<InteractiveSelector />
 			</Box>
 		</Grid2>
