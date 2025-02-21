@@ -1,8 +1,6 @@
-import { Box, Container, Typography, useTheme } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import About from '../../../shared/images/hero-restaurant.png'
 const LegalPage = () => {
-	const theme = useTheme()
-
 	return (
 		<Box
 			sx={{

@@ -7,8 +7,6 @@ import Background from './../../../shared/images/hero-restaurant.png'
 
 import Handwritten from '../components/Handwritten'
 import { motion } from 'framer-motion'
-import AnimatedText from '../../../components/AnimatedText'
-import AnimatedTextV2 from '../../../components/AnimatedTextV2'
 
 const HeroSection: FC = () => {
 	const theme = useTheme()

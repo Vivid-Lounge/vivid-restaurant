@@ -1,16 +1,7 @@
-import {
-	Box,
-	Grid,
-	Typography,
-	useTheme,
-	useMediaQuery,
-	Grid2,
-} from '@mui/material'
+import { Box, Typography, Grid2 } from '@mui/material'
 import { LocationOn, Phone, Email } from '@mui/icons-material'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 
 const testimonials = [
 	{
@@ -28,9 +19,6 @@ const testimonials = [
 ]
 
 const LocationTestimonialsSection = () => {
-	const theme = useTheme()
-	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-
 	return (
 		<Box
 			sx={{

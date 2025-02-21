@@ -2,7 +2,7 @@ import { Box, Link, Stack, Typography } from '@mui/material'
 import { VividLogoIcon } from '../../../shared/icons'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import InstagramIcon from '@mui/icons-material/Instagram'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const FooterSection = () => {
 	const navigate = useNavigate()

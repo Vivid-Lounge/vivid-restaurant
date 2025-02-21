@@ -4,7 +4,9 @@ import { Home } from './pages'
 import TableOrderPage from './pages/TableOrder/TableOrderPage'
 import MainLayout from './layout/MainLayout'
 import Legal from './pages/Home/sections/Legal'
-import FooterSection from './pages/Home/sections/FooterSection'
+
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 function App() {
 	return (
